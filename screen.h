@@ -17,6 +17,8 @@ namespace screenComponents {
     public:
       Screen();
       bool initScreen();
+      void updateScreen();
+      void setPixel(int,int,Uint32,Uint32,Uint32);
       bool processEvent();
       void destroyScreen();
   };
