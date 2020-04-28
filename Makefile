@@ -188,14 +188,20 @@
 #--------------------------------------------------------------------------
 
 
-run: main.o screen.o
-	g++ -o run screen.o main.o -lSDL2
+run: main.o screen.o particle.o util.o
+	g++ -o run screen.o main.o particle.o util.o -lSDL2
 
 main.o: main.cpp screen.h
 	g++ -c main.cpp
 
 screen.o: screen.cpp
 	g++ -c screen.cpp -lSDl2
+
+util.o: util.cpp
+	g++ -c util.cpp -lSDL2
+
+particle.o: particle.cpp
+	g++ -c particle.cpp -lSDL2
 
 clean:
 	rm *.o run
