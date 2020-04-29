@@ -1,13 +1,14 @@
 #include <iostream>
 #include <SDL2/SDL.h>
-#include "screen.h"
 #include <time.h>
-#include <stdlib.h>
 #include <math.h>
 
-using namespace std;
-using namespace screenComponents;
+#include "screen.h"
+#include "util.h"
+#include "particle.h"
 
+using namespace std;
+using namespace particleExplosion;
 //#define startx 800/4
 //#define endx 3*800/4
 //#define starty 600/4
@@ -18,37 +19,37 @@ using namespace screenComponents;
 int main() {
   srand(time(0));
   Screen screen;
-
+  
   if (!screen.initScreen()) {
     cout<<"Error : Unable to init SDL"<<endl;
   }
+
+  Util util;
 
   while(true) {
     // update screen 
     // create particles
     // trigger events
-    // update particle states
-
-
-    //  int x = (rand() % (startx - endx + 1)) + endx;
-    //  int y = (rand() % (starty - endy + 1)) + endy;
-    //  Uint32 red = (rand() % (colorstart - colorend + 1)) + colorend;
-    //  Uint32 green = (rand() % (colorstart - colorend + 1)) + colorend;
-    //  Uint32 blue = (rand() % (colorstart - colorend + 1)) + colorend;
-
-    //  screen.setPixel(x,y,red,green,blue);
-
+    // update particle state
+  
     int elapsed = SDL_GetTicks();
-    unsigned char red = (unsigned char)(1 + sin(elapsed * 0.0001) * 128); 
-    unsigned char green = (unsigned char)(1 + sin(elapsed * 0.0002) * 128);
-    unsigned char blue = (unsigned char)(1 + cos(elapsed * 0.0003) * 128);
-    for(int y = 0; y < Screen::SCREEN_HEIGHT; y++) {
-      for(int x = 0; x < Screen::SCREEN_WIDTH; x++) {
-        screen.setPixel(x,y,red,green,blue);
-      }
-    }
+    util.update();
+    screen.clearScreen();
+    unsigned char red = (unsigned char) ((1 + sin(elapsed * 0.0001)) * 128);
+    unsigned char green = (unsigned char) ((1 + sin(elapsed * 0.0002)) * 128);
+    unsigned char blue = (unsigned char) ((1 + sin(elapsed * 0.0003)) * 128);
 
-    //screen.setPixel(400,300,255,255,255);
+    const Particle * const pParticles = util.getParticles();
+
+
+    for(int i = 0 ;i<Util::N_PARTICLES;i++) {
+      Particle particle = pParticles[i];
+
+      int x = (particle.m_x + 1) * Screen::SCREEN_WIDTH / 2;
+      int y = (particle.m_y + 1) * Screen::SCREEN_HEIGHT / 2;
+
+      screen.setPixel(x,y,red,green,blue);
+    }
 
     screen.updateScreen();
 
