@@ -3,7 +3,7 @@
 
 #include <SDL2/SDL.h>
 
-namespace screenComponents {
+namespace particleExplosion {
 
   class Screen {
     public:
@@ -18,6 +18,7 @@ namespace screenComponents {
       Screen();
       bool initScreen();
       void updateScreen();
+      void clearScreen();
       void setPixel(int,int,Uint32,Uint32,Uint32);
       bool processEvent();
       void destroyScreen();

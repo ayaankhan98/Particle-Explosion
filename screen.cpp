@@ -1,22 +1,27 @@
 #include "screen.h"
 
-namespace screenComponents {
+namespace particleExplosion
+{
 
-  Screen::Screen():
-    m_window(NULL), m_renderer(NULL), m_texture(NULL), m_buffer(NULL) {
+  Screen::Screen() : m_window(NULL), m_renderer(NULL), m_texture(NULL), m_buffer(NULL)
+  {
+  }
 
-    }
+  bool Screen::initScreen()
+  {
 
-  bool Screen::initScreen() {
-
-    if (SDL_Init(SDL_INIT_VIDEO) < 0 ) {
+    if (SDL_Init(SDL_INIT_VIDEO) < 0)
+    {
       return false;
     }
+
     m_window = SDL_CreateWindow("Particle Fire Explosion",
         SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH,
         SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 
-    if (m_window == NULL) {
+    if (m_window == NULL)
+    {
+      SDL_Quit();
       return false;
     }
 
@@ -24,37 +29,39 @@ namespace screenComponents {
     m_texture = SDL_CreateTexture(m_renderer, SDL_PIXELFORMAT_RGBA8888,
         SDL_TEXTUREACCESS_STATIC, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-    if (m_renderer == NULL) {
+    if (m_renderer == NULL)
+    {
       SDL_DestroyWindow(m_window);
       SDL_Quit();
       return false;
     }
 
-    if (m_texture == NULL) {
+    if (m_texture == NULL)
+    {
       SDL_DestroyRenderer(m_renderer);
       SDL_DestroyWindow(m_window);
       SDL_Quit();
       return false;
     }
 
-    m_buffer = new Uint32[SCREEN_WIDTH*SCREEN_HEIGHT];
+    m_buffer = new Uint32[SCREEN_WIDTH * SCREEN_HEIGHT];
 
-    memset(m_buffer, 0, SCREEN_WIDTH*SCREEN_HEIGHT*sizeof(Uint32));
+    memset(m_buffer, 0, SCREEN_WIDTH * SCREEN_HEIGHT * sizeof(Uint32));
 
     return true;
   }
 
-  void Screen::updateScreen() { 
-
-    SDL_UpdateTexture(m_texture,NULL,m_buffer,SCREEN_WIDTH*sizeof(Uint32));
-    SDL_RenderClear(m_renderer);
-    SDL_RenderCopy(m_renderer,m_texture,NULL,NULL);
-    SDL_RenderPresent(m_renderer);
-
+  void Screen::clearScreen()
+  {
+    memset(m_buffer, 0, SCREEN_WIDTH * SCREEN_HEIGHT * sizeof(Uint32));
   }
+  void Screen::setPixel(int x, int y, Uint32 red, Uint32 green, Uint32 blue)
+  {
 
-  void Screen::setPixel(int x, int y, Uint32 red, Uint32 green, Uint32 blue) {
-
+    if (x < 0 || x >= SCREEN_WIDTH || y < 0 || y >= SCREEN_HEIGHT)
+    {
+      return;
+    }
     Uint32 color = 0;
 
     color += red;
@@ -65,27 +72,39 @@ namespace screenComponents {
     color <<= 8;
     color += 0xFF;
 
-    m_buffer[(y* SCREEN_WIDTH) + x] = color;
+    m_buffer[(y * SCREEN_WIDTH) + x] = color;
+  }
+  void Screen::updateScreen()
+  {
+
+    SDL_UpdateTexture(m_texture, NULL, m_buffer, SCREEN_WIDTH * sizeof(Uint32));
+    SDL_RenderClear(m_renderer);
+    SDL_RenderCopy(m_renderer, m_texture, NULL, NULL);
+    SDL_RenderPresent(m_renderer);
   }
 
-  bool Screen::processEvent() {
+  bool Screen::processEvent()
+  {
 
     SDL_Event event;
 
-    while(SDL_PollEvent(&event)) {
-      if (event.type == SDL_QUIT) { 
+    while (SDL_PollEvent(&event))
+    {
+      if (event.type == SDL_QUIT)
+      {
         return false;
       }
     }
     return true;
   }
 
-  void Screen::destroyScreen() {
-    delete [] m_buffer;
+  void Screen::destroyScreen()
+  {
+    delete[] m_buffer;
     SDL_DestroyRenderer(m_renderer);
     SDL_DestroyTexture(m_texture);
     SDL_DestroyWindow(m_window);
     SDL_Quit();
   }
 
-}
+} // namespace particleExplosion
