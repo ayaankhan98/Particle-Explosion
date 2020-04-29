@@ -1,4 +1,4 @@
-# particle-fire-explosion
+# Particle-Explosion
 Creating a simple particle explosion using C++ SDL API
 
 ## Requirements to run on Local Machine
