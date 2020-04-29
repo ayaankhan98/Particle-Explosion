@@ -16,7 +16,7 @@ namespace particleExplosion
       return false;
     }
 
-    m_window = SDL_CreateWindow("Particle Fire Explosion",
+    m_window = SDL_CreateWindow("Particle Explosion",
         SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH,
         SCREEN_HEIGHT, SDL_WINDOW_RESIZABLE);
 
