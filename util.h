@@ -7,13 +7,14 @@ namespace particleExplosion{
 
   class Util {
    public:
-     const static int N_PARTICLES = 10000;
+     const static int N_PARTICLES = 50000;
     private:
       Particle *m_pParticles;
+      int lastTime;
     public:
       Util();
       ~Util();
-      void update();
+      void update(int);
       const Particle * const getParticles() { 
         return m_pParticles; 
       }

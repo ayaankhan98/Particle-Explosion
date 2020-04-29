@@ -6,11 +6,13 @@ namespace particleExplosion {
       double m_x;
       double m_y;
 
-      double m_xSpeed;
-      double m_ySpeed;
+      double m_speed;
+      double m_direction;
+//      double m_xSpeed;
+//      double m_ySpeed;
     public:
       Particle();
-      void updateParticleState();
+      void updateParticleState(int);
       ~Particle();
   };
 }
