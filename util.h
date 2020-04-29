@@ -7,7 +7,7 @@ namespace particleExplosion{
 
   class Util {
    public:
-     const static int N_PARTICLES = 50000;
+     const static long int N_PARTICLES = 8000;
     private:
       Particle *m_pParticles;
       int lastTime;

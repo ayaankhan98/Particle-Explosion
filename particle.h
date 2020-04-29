@@ -12,6 +12,7 @@ namespace particleExplosion {
 //      double m_ySpeed;
     public:
       Particle();
+      void reInitParticle();
       void updateParticleState(int);
       ~Particle();
   };

@@ -19,7 +19,7 @@ using namespace particleExplosion;
 int main() {
   srand(time(0));
   Screen screen;
-  
+
   if (!screen.initScreen()) {
     cout<<"Error : Unable to init SDL"<<endl;
   }
@@ -31,11 +31,11 @@ int main() {
     // create particles
     // trigger events
     // update particle state
-  
+
     int elapsed = SDL_GetTicks();
     util.update(elapsed);
-   // cout<<elapsed<<"\n";
-    screen.clearScreen();
+    // cout<<elapsed<<"\n";
+    //     screen.clearScreen();
     unsigned char red = (unsigned char) ((1 + sin(elapsed * 0.0001)) * 128);
     unsigned char green = (unsigned char) ((1 + sin(elapsed * 0.0002)) * 128);
     unsigned char blue = (unsigned char) ((1 + sin(elapsed * 0.0003)) * 128);
@@ -51,6 +51,8 @@ int main() {
 
       screen.setPixel(x,y,red,green,blue);
     }
+
+    screen.boxBlur();
 
     screen.updateScreen();
 
