@@ -17,7 +17,6 @@ namespace particleExplosion {
     lastTime = elapsed;
   }
   Util::~Util() {
-    // Util Destructor
     delete [] m_pParticles;
   }
 }
