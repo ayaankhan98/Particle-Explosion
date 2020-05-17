@@ -1,4 +1,7 @@
 # Particle-Explosion
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/e25f1262955e49d38fe21318bb30b2d4)](https://app.codacy.com/manual/ayaankhan98/Particle-Explosion?utm_source=github.com&utm_medium=referral&utm_content=ayaankhan98/Particle-Explosion&utm_campaign=Badge_Grade_Dashboard)
+
 Creating a simple particle explosion using C++ SDL API
 
 ## Requirements to run on Local Machine
