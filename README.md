@@ -18,11 +18,6 @@ you can play around this by tweaking the motion of particles
 ## Preview
 
 ![alt text](./preview/p1.png)
-![alt text](./preview/p2.png)
-![alt text](./preview/p3.png)
-![alt text](./preview/p4.png)
-![alt text](./preview/p5.png)
-![alt text](./preview/p6.png)
 
 ## Have Fun!
 By just changing the various mathematical functions used such as `sine`, `cosine` ,`tangent` etc you can create different patterns.
